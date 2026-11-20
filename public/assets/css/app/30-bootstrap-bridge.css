@@ -1,0 +1,327 @@
+/* ==========================================================================
+   30-bootstrap-bridge.css — re-skins Bootstrap 5.3.3 (RTL build) through ITS OWN variables, driven by our tokens.
+   Loads AFTER bootstrap.rtl.min.css (see includes/layout/head.php). Selectors start with html[data-bs-theme] so they
+   beat Bootstrap's :root / [data-bs-theme=dark] blocks without !important.
+   STATUS: written from Bootstrap 5.3.3's documented variables. NOT executed against the real Bootstrap in the
+   environment that produced this document (no network). The agent must open /ui-kit/index.html with Bootstrap present
+   and compare it with the 12 visual traps listed in master-prompt-10a §"Bootstrap bridge traps".
+   The only !important rules: .text-bg-* (Bootstrap itself uses !important there) and the Swal backdrop.
+   ========================================================================== */
+
+html[data-bs-theme] {
+  --bs-body-font-family: var(--font-sans);
+  --bs-body-font-size: var(--fs-md);
+  --bs-body-line-height: var(--lh-body);
+  --bs-body-color: var(--text);
+  --bs-body-color-rgb: var(--rgb-text);
+  --bs-body-bg: var(--bg);
+  --bs-body-bg-rgb: var(--rgb-bg);
+  --bs-emphasis-color: var(--text-heading);
+  --bs-emphasis-color-rgb: var(--rgb-text);
+  --bs-secondary-color: var(--text-muted);
+  --bs-secondary-bg: var(--surface-3);
+  --bs-tertiary-color: var(--text-faint);
+  --bs-tertiary-bg: var(--surface-2);
+  --bs-heading-color: var(--text-heading);
+  --bs-link-color: var(--text-link);
+  --bs-link-hover-color: var(--text-link);
+  --bs-border-color: var(--border);
+  --bs-border-color-translucent: var(--border);
+  --bs-border-radius: var(--radius-sm);
+  --bs-border-radius-sm: var(--radius-sm);
+  --bs-border-radius-lg: var(--radius-md);
+  --bs-border-radius-xl: var(--radius-lg);
+  --bs-box-shadow: var(--shadow-2);
+  --bs-box-shadow-sm: var(--shadow-1);
+  --bs-box-shadow-lg: var(--shadow-3);
+  --bs-focus-ring-color: var(--focus-ring);
+  --bs-code-color: var(--text);
+  --bs-highlight-bg: var(--warning-soft);
+
+  --bs-primary: var(--primary);
+  --bs-primary-rgb: var(--rgb-primary);
+  --bs-primary-text-emphasis: var(--primary-soft-text);
+  --bs-primary-bg-subtle: var(--primary-soft);
+  --bs-primary-border-subtle: var(--border-strong);
+  --bs-success: var(--success-solid);
+  --bs-success-rgb: var(--rgb-success);
+  --bs-success-text-emphasis: var(--success-text);
+  --bs-success-bg-subtle: var(--success-soft);
+  --bs-success-border-subtle: var(--success-text);
+  --bs-warning: var(--warning-solid);
+  --bs-warning-rgb: var(--rgb-warning);
+  --bs-warning-text-emphasis: var(--warning-text);
+  --bs-warning-bg-subtle: var(--warning-soft);
+  --bs-warning-border-subtle: var(--warning-text);
+  --bs-danger: var(--danger-solid);
+  --bs-danger-rgb: var(--rgb-danger);
+  --bs-danger-text-emphasis: var(--danger-text);
+  --bs-danger-bg-subtle: var(--danger-soft);
+  --bs-danger-border-subtle: var(--danger-text);
+  --bs-info: var(--info-solid);
+  --bs-info-rgb: var(--rgb-info);
+  --bs-info-text-emphasis: var(--info-text);
+  --bs-info-bg-subtle: var(--info-soft);
+  --bs-info-border-subtle: var(--info-text);
+  --bs-form-valid-color: var(--success-text);
+  --bs-form-valid-border-color: var(--success-text);
+  --bs-form-invalid-color: var(--danger-text);
+  --bs-form-invalid-border-color: var(--danger-text);
+}
+
+/* Trap 1: a white primary makes Bootstrap's hard-coded white label on .text-bg-primary invisible in dark. */
+html[data-bs-theme] .text-bg-primary { color: var(--on-primary) !important; }
+html[data-bs-theme] .text-bg-success { color: var(--on-success) !important; }
+html[data-bs-theme] .text-bg-warning { color: var(--on-warning) !important; }
+html[data-bs-theme] .text-bg-danger { color: var(--on-danger) !important; }
+html[data-bs-theme] .text-bg-info { color: var(--on-info) !important; }
+
+/* ---- Buttons ---------------------------------------------------------------- */
+html[data-bs-theme] .btn {
+  --bs-btn-padding-x: var(--space-4);
+  --bs-btn-padding-y: 0.5rem;
+  --bs-btn-font-weight: var(--fw-semibold);
+  --bs-btn-border-radius: var(--radius-md);
+  --bs-btn-focus-shadow-rgb: var(--rgb-focus);
+  min-block-size: var(--control-h);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+}
+html[data-bs-theme] .btn-sm { --bs-btn-padding-x: var(--space-3); --bs-btn-padding-y: 0.25rem; --bs-btn-border-radius: var(--radius-sm); min-block-size: var(--control-h-sm); }
+html[data-bs-theme] .btn-primary {
+  --bs-btn-color: var(--on-primary); --bs-btn-bg: var(--primary); --bs-btn-border-color: var(--primary);
+  --bs-btn-hover-color: var(--on-primary); --bs-btn-hover-bg: var(--primary-hover); --bs-btn-hover-border-color: var(--primary-hover);
+  --bs-btn-active-color: var(--on-primary); --bs-btn-active-bg: var(--primary-active); --bs-btn-active-border-color: var(--primary-active);
+  --bs-btn-disabled-color: var(--text-disabled); --bs-btn-disabled-bg: var(--surface-3); --bs-btn-disabled-border-color: var(--border-strong);
+}
+html[data-bs-theme] .btn-secondary, html[data-bs-theme] .btn-outline-secondary, html[data-bs-theme] .btn-light {
+  --bs-btn-color: var(--secondary-text); --bs-btn-bg: var(--secondary-bg); --bs-btn-border-color: var(--secondary-border);
+  --bs-btn-hover-color: var(--secondary-text); --bs-btn-hover-bg: var(--secondary-bg-hover); --bs-btn-hover-border-color: var(--border-control-hover);
+  --bs-btn-active-color: var(--secondary-text); --bs-btn-active-bg: var(--secondary-bg-hover); --bs-btn-active-border-color: var(--border-control-hover);
+  --bs-btn-disabled-color: var(--text-disabled); --bs-btn-disabled-bg: var(--surface-3); --bs-btn-disabled-border-color: var(--border-strong);
+}
+html[data-bs-theme] .btn-outline-primary {
+  --bs-btn-color: var(--primary-soft-text); --bs-btn-bg: transparent; --bs-btn-border-color: var(--secondary-border);
+  --bs-btn-hover-color: var(--on-primary); --bs-btn-hover-bg: var(--primary); --bs-btn-hover-border-color: var(--primary);
+  --bs-btn-active-color: var(--on-primary); --bs-btn-active-bg: var(--primary-active); --bs-btn-active-border-color: var(--primary-active);
+  --bs-btn-disabled-color: var(--text-disabled); --bs-btn-disabled-bg: transparent; --bs-btn-disabled-border-color: var(--border-strong);
+}
+html[data-bs-theme] .btn-success, html[data-bs-theme] .btn-danger, html[data-bs-theme] .btn-warning, html[data-bs-theme] .btn-info {
+  --bs-btn-disabled-color: var(--text-disabled); --bs-btn-disabled-bg: var(--surface-3); --bs-btn-disabled-border-color: var(--border-strong);
+}
+html[data-bs-theme] .btn-success { --bs-btn-color: var(--on-success); --bs-btn-bg: var(--success-solid); --bs-btn-border-color: var(--success-solid); --bs-btn-hover-color: var(--on-success); --bs-btn-hover-bg: var(--success-solid); --bs-btn-hover-border-color: var(--success-solid); --bs-btn-active-color: var(--on-success); --bs-btn-active-bg: var(--success-solid); --bs-btn-active-border-color: var(--success-solid); }
+html[data-bs-theme] .btn-danger { --bs-btn-color: var(--on-danger); --bs-btn-bg: var(--danger-solid); --bs-btn-border-color: var(--danger-solid); --bs-btn-hover-color: var(--on-danger); --bs-btn-hover-bg: var(--danger-solid); --bs-btn-hover-border-color: var(--danger-solid); --bs-btn-active-color: var(--on-danger); --bs-btn-active-bg: var(--danger-solid); --bs-btn-active-border-color: var(--danger-solid); }
+html[data-bs-theme] .btn-warning { --bs-btn-color: var(--on-warning); --bs-btn-bg: var(--warning-solid); --bs-btn-border-color: var(--warning-solid); --bs-btn-hover-color: var(--on-warning); --bs-btn-hover-bg: var(--warning-solid); --bs-btn-hover-border-color: var(--warning-solid); --bs-btn-active-color: var(--on-warning); --bs-btn-active-bg: var(--warning-solid); --bs-btn-active-border-color: var(--warning-solid); }
+html[data-bs-theme] .btn-info { --bs-btn-color: var(--on-info); --bs-btn-bg: var(--info-solid); --bs-btn-border-color: var(--info-solid); --bs-btn-hover-color: var(--on-info); --bs-btn-hover-bg: var(--info-solid); --bs-btn-hover-border-color: var(--info-solid); --bs-btn-active-color: var(--on-info); --bs-btn-active-bg: var(--info-solid); --bs-btn-active-border-color: var(--info-solid); }
+html[data-bs-theme] .btn-outline-danger { --bs-btn-color: var(--danger-text); --bs-btn-bg: transparent; --bs-btn-border-color: var(--danger-text); --bs-btn-hover-color: var(--on-danger); --bs-btn-hover-bg: var(--danger-solid); --bs-btn-hover-border-color: var(--danger-solid); --bs-btn-active-color: var(--on-danger); --bs-btn-active-bg: var(--danger-solid); --bs-btn-active-border-color: var(--danger-solid); }
+html[data-bs-theme] .btn-outline-warning { --bs-btn-color: var(--warning-text); --bs-btn-bg: transparent; --bs-btn-border-color: var(--warning-text); --bs-btn-hover-color: var(--on-warning); --bs-btn-hover-bg: var(--warning-solid); --bs-btn-hover-border-color: var(--warning-solid); --bs-btn-active-color: var(--on-warning); --bs-btn-active-bg: var(--warning-solid); --bs-btn-active-border-color: var(--warning-solid); }
+html[data-bs-theme] .btn-link { --bs-btn-color: var(--text-link); --bs-btn-hover-color: var(--text-link); --bs-btn-active-color: var(--text-link); --bs-btn-disabled-color: var(--text-disabled); }
+html[data-bs-theme] .btn:focus-visible { outline: var(--focus-width) solid var(--focus-ring); outline-offset: var(--focus-offset); box-shadow: none; }
+/* Disabled is not color-only: also not-allowed cursor and a dashed edge. */
+html[data-bs-theme] .btn:disabled, html[data-bs-theme] .btn.disabled { cursor: not-allowed; border-style: dashed; }
+
+/* ---- Cards, tables ---------------------------------------------------------- */
+html[data-bs-theme] .card {
+  --bs-card-bg: var(--surface);
+  --bs-card-color: var(--text);
+  --bs-card-border-color: var(--border);
+  --bs-card-border-radius: var(--radius-lg);
+  --bs-card-inner-border-radius: calc(var(--radius-lg) - 1px);
+  --bs-card-cap-bg: var(--surface-2);
+  --bs-card-cap-color: var(--text-heading);
+  --bs-card-title-color: var(--text-heading);
+  --bs-card-subtitle-color: var(--text-muted);
+  box-shadow: var(--shadow-1);
+}
+html[data-bs-theme] .table {
+  --bs-table-color: var(--text);
+  --bs-table-bg: transparent;
+  --bs-table-border-color: var(--border);
+  --bs-table-striped-bg: var(--surface-2);
+  --bs-table-striped-color: var(--text);
+  --bs-table-hover-bg: var(--surface-3);
+  --bs-table-hover-color: var(--text);
+  --bs-table-active-bg: var(--surface-3);
+  --bs-table-active-color: var(--text);
+}
+html[data-bs-theme] .table > thead > tr > th { background: var(--surface-2); color: var(--text-muted); font-size: var(--fs-sm); font-weight: var(--fw-semibold); white-space: nowrap; }
+html[data-bs-theme] .table > :not(caption) > * > * { padding: var(--space-3) var(--space-4); }
+
+/* ---- Forms ------------------------------------------------------------------- */
+html[data-bs-theme] .form-label { margin-block-end: var(--space-1); color: var(--text-label); font-size: var(--fs-sm); font-weight: var(--fw-semibold); }
+html[data-bs-theme] .form-text { color: var(--text-hint); font-size: var(--fs-xs); }
+html[data-bs-theme] .form-control, html[data-bs-theme] .form-select {
+  min-block-size: var(--control-h);
+  padding: 0.5rem var(--space-3);
+  border: 1px solid var(--border-control);
+  border-radius: var(--radius-md);
+  background-color: var(--surface-input);
+  color: var(--text);
+  font-size: var(--fs-md);
+  box-shadow: none;
+}
+html[data-bs-theme] .form-control:hover:not(:disabled), html[data-bs-theme] .form-select:hover:not(:disabled) { border-color: var(--border-control-hover); }
+html[data-bs-theme] .form-control:focus, html[data-bs-theme] .form-select:focus {
+  background-color: var(--surface-input);
+  color: var(--text);
+  border-color: var(--focus-ring);
+  outline: var(--focus-width) solid var(--focus-ring);
+  outline-offset: 0;
+  box-shadow: none;
+}
+html[data-bs-theme] .form-control::placeholder { color: var(--text-placeholder); opacity: 1; }
+html[data-bs-theme] .form-control:disabled, html[data-bs-theme] .form-select:disabled, html[data-bs-theme] .form-control[readonly] {
+  background-color: var(--surface-3);
+  color: var(--text-disabled);
+  border-style: dashed;
+  border-color: var(--border-strong);
+  cursor: not-allowed;
+  opacity: 1;
+}
+html[data-bs-theme] .form-control::file-selector-button { margin-inline-end: var(--space-3); border: 0; border-radius: var(--radius-sm); background: var(--secondary-bg-hover); color: var(--secondary-text); padding: 0.35rem var(--space-3); }
+html[data-bs-theme] .form-control.is-invalid, html[data-bs-theme] .was-validated .form-control:invalid { border-color: var(--danger-text); border-width: 2px; }
+html[data-bs-theme] .form-control.is-valid, html[data-bs-theme] .was-validated .form-control:valid { border-color: var(--success-text); border-width: 2px; }
+/* Bootstrap paints a red/green icon inside the field with a fixed color: hide it, the message below carries an icon of its own. */
+html[data-bs-theme] .form-control.is-invalid, html[data-bs-theme] .form-control.is-valid, html[data-bs-theme] .was-validated .form-control:invalid, html[data-bs-theme] .was-validated .form-control:valid { background-image: none; padding-inline-end: var(--space-3); }
+html[data-bs-theme] .form-select { --bs-form-select-bg-img: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%237a88a3' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e"); }
+html[data-bs-theme="dark"] .form-select { --bs-form-select-bg-img: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23a3a3af' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e"); }
+/* Bootstrap's RTL build already puts the select arrow on the left (inline-end); keep room for it. */
+html[data-bs-theme] .form-select { padding-inline: var(--space-3) 2.25rem; }
+
+html[data-bs-theme] .form-check-input { inline-size: 1.25rem; block-size: 1.25rem; margin-block-start: 0.2rem; border: 1px solid var(--border-control); background-color: var(--surface-input); }
+html[data-bs-theme] .form-check-input:checked { background-color: var(--primary); border-color: var(--primary); }
+html[data-bs-theme] .form-check-input:focus-visible { outline: var(--focus-width) solid var(--focus-ring); outline-offset: var(--focus-offset); box-shadow: none; }
+/* Trap 2: Bootstrap's check mark and switch knob are white, invisible on a white primary (dark theme). */
+html[data-bs-theme="dark"] .form-check-input:checked[type="checkbox"] { --bs-form-check-bg-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%230b0b0d' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='m6 10 3 3 6-6'/%3e%3c/svg%3e"); }
+html[data-bs-theme="dark"] .form-check-input:checked[type="radio"] { --bs-form-check-bg-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='2' fill='%230b0b0d'/%3e%3c/svg%3e"); }
+html[data-bs-theme] .form-switch .form-check-input { inline-size: 2.5rem; --bs-form-switch-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%237a88a3'/%3e%3c/svg%3e"); }
+html[data-bs-theme] .form-switch .form-check-input:checked { --bs-form-switch-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23ffffff'/%3e%3c/svg%3e"); }
+html[data-bs-theme="dark"] .form-switch .form-check-input { --bs-form-switch-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23a3a3af'/%3e%3c/svg%3e"); }
+html[data-bs-theme="dark"] .form-switch .form-check-input:checked { --bs-form-switch-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%230b0b0d'/%3e%3c/svg%3e"); }
+
+/* Trap 7: browser autofill paints a pale fixed background under the saved value; with the light text of the dark theme that is unreadable. */
+html[data-bs-theme] .form-control:-webkit-autofill,
+html[data-bs-theme] .form-control:-webkit-autofill:hover,
+html[data-bs-theme] .form-control:-webkit-autofill:focus,
+html[data-bs-theme] .form-select:-webkit-autofill {
+  -webkit-text-fill-color: var(--text);
+  caret-color: var(--text);
+  box-shadow: 0 0 0 1000px var(--surface-input) inset;
+}
+
+/* ---- Alerts (markup must carry an icon element: state is never color-only) ---------- */
+html[data-bs-theme] .alert { --bs-alert-border-radius: var(--radius-md); --bs-alert-padding-x: var(--space-4); --bs-alert-padding-y: var(--space-3); display: flex; align-items: flex-start; gap: var(--space-3); border-width: 1px; }
+html[data-bs-theme] .alert > .ti, html[data-bs-theme] .alert > i { flex: 0 0 auto; font-size: 1.25rem; margin-block-start: 0.15rem; }
+html[data-bs-theme] .alert-info { --bs-alert-color: var(--info-text); --bs-alert-bg: var(--info-soft); --bs-alert-border-color: var(--info-text); }
+html[data-bs-theme] .alert-success { --bs-alert-color: var(--success-text); --bs-alert-bg: var(--success-soft); --bs-alert-border-color: var(--success-text); }
+html[data-bs-theme] .alert-warning { --bs-alert-color: var(--warning-text); --bs-alert-bg: var(--warning-soft); --bs-alert-border-color: var(--warning-text); }
+html[data-bs-theme] .alert-danger { --bs-alert-color: var(--danger-text); --bs-alert-bg: var(--danger-soft); --bs-alert-border-color: var(--danger-text); }
+
+/* ---- Overlays: modal, dropdown, popover --------------------------------------------- */
+html[data-bs-theme] .modal {
+  --bs-modal-bg: var(--surface-raised);
+  --bs-modal-color: var(--text);
+  --bs-modal-border-color: var(--border);
+  --bs-modal-border-radius: var(--radius-lg);
+  --bs-modal-inner-border-radius: calc(var(--radius-lg) - 1px);
+  --bs-modal-header-border-color: var(--border);
+  --bs-modal-footer-border-color: var(--border);
+  --bs-modal-box-shadow: var(--shadow-3);
+  --bs-modal-title-line-height: var(--lh-tight);
+}
+html[data-bs-theme] .modal-title { color: var(--text-heading); font-size: var(--fs-lg); font-weight: var(--fw-bold); }
+html[data-bs-theme] .modal-footer { justify-content: flex-start; gap: var(--space-2); }
+html[data-bs-theme] .modal-backdrop { --bs-backdrop-bg: #000; --bs-backdrop-opacity: 0.55; }
+html[data-bs-theme] .dropdown-menu {
+  --bs-dropdown-bg: var(--surface-raised);
+  --bs-dropdown-color: var(--text);
+  --bs-dropdown-border-color: var(--border);
+  --bs-dropdown-border-radius: var(--radius-md);
+  --bs-dropdown-divider-bg: var(--border);
+  --bs-dropdown-link-color: var(--text);
+  --bs-dropdown-link-hover-color: var(--text);
+  --bs-dropdown-link-hover-bg: var(--surface-3);
+  --bs-dropdown-link-active-color: var(--primary-soft-text);
+  --bs-dropdown-link-active-bg: var(--primary-soft);
+  --bs-dropdown-link-disabled-color: var(--text-disabled);
+  --bs-dropdown-box-shadow: var(--shadow-3);
+  --bs-dropdown-padding-y: var(--space-2);
+  --bs-dropdown-item-padding-x: var(--space-4);
+  --bs-dropdown-item-padding-y: var(--space-2);
+}
+html[data-bs-theme] .dropdown-item { display: flex; align-items: center; gap: var(--space-2); border-radius: var(--radius-sm); }
+html[data-bs-theme] .dropdown-menu { padding-inline: var(--space-2); }
+
+/* ---- Navigation: pills (segmented tabs), pagination -------------------------------- */
+html[data-bs-theme] .nav-pills {
+  --bs-nav-pills-border-radius: var(--radius-pill);
+  --bs-nav-pills-link-active-color: var(--on-primary);
+  --bs-nav-pills-link-active-bg: var(--primary);
+  --bs-nav-link-color: var(--text-muted);
+  --bs-nav-link-hover-color: var(--text);
+  --bs-nav-link-padding-x: var(--space-4);
+  --bs-nav-link-padding-y: var(--space-2);
+  --bs-nav-link-font-weight: var(--fw-medium);
+  gap: var(--space-1);
+}
+html[data-bs-theme] .nav-pills .nav-link:hover:not(.active) { background: var(--surface-3); }
+html[data-bs-theme] .pagination {
+  --bs-pagination-color: var(--text);
+  --bs-pagination-bg: var(--surface);
+  --bs-pagination-border-color: var(--border);
+  --bs-pagination-hover-color: var(--text);
+  --bs-pagination-hover-bg: var(--surface-3);
+  --bs-pagination-hover-border-color: var(--border-strong);
+  --bs-pagination-focus-color: var(--text);
+  --bs-pagination-focus-bg: var(--surface-3);
+  --bs-pagination-focus-box-shadow: none;
+  --bs-pagination-active-color: var(--on-primary);
+  --bs-pagination-active-bg: var(--primary);
+  --bs-pagination-active-border-color: var(--primary);
+  --bs-pagination-disabled-color: var(--text-disabled);
+  --bs-pagination-disabled-bg: var(--surface-2);
+  --bs-pagination-disabled-border-color: var(--border);
+  --bs-pagination-border-radius: var(--radius-sm);
+  gap: var(--space-1);
+}
+html[data-bs-theme] .pagination .page-link { border-radius: var(--radius-sm); min-inline-size: var(--control-h-sm); text-align: center; }
+
+/* ---- Progress, badges, list groups, close button ------------------------------------ */
+html[data-bs-theme] .progress { --bs-progress-bg: var(--surface-3); --bs-progress-bar-bg: var(--primary); --bs-progress-bar-color: var(--on-primary); --bs-progress-border-radius: var(--radius-pill); }
+html[data-bs-theme] .badge { font-weight: var(--fw-semibold); }
+html[data-bs-theme] .list-group { --bs-list-group-bg: var(--surface); --bs-list-group-color: var(--text); --bs-list-group-border-color: var(--border); --bs-list-group-action-hover-bg: var(--surface-3); --bs-list-group-action-hover-color: var(--text); --bs-list-group-active-bg: var(--primary); --bs-list-group-active-color: var(--on-primary); --bs-list-group-active-border-color: var(--primary); }
+html[data-bs-theme="dark"] .btn-close { filter: invert(1) grayscale(100%) brightness(200%); }
+
+/* ---- SweetAlert2 11.x -------------------------------------------------------------------
+   Two layers, because the variables are the clean way but are unverified against the vendored build:
+   (1) the --swal2-* variables (present in 11.x since the CSS-variable release; confirm in the vendored css),
+   (2) explicit selectors with raised specificity (html[data-bs-theme] ...) because Swal injects its <style> late. */
+html[data-bs-theme] {
+  --swal2-background: var(--surface-raised);
+  --swal2-color: var(--text);
+  --swal2-border-radius: var(--radius-lg);
+  --swal2-backdrop: var(--overlay);
+  --swal2-input-background: var(--surface-input);
+  --swal2-footer-border-color: var(--border);
+  --swal2-validation-message-background: var(--danger-soft);
+  --swal2-validation-message-color: var(--danger-text);
+}
+html[data-bs-theme] .swal2-popup { background: var(--surface-raised); color: var(--text); border: 1px solid var(--border); border-radius: var(--radius-lg); box-shadow: var(--shadow-3); font-family: var(--font-sans); }
+html[data-bs-theme] .swal2-title { color: var(--text-heading); font-size: var(--fs-xl); font-weight: var(--fw-bold); }
+html[data-bs-theme] .swal2-html-container { color: var(--text-muted); font-size: var(--fs-md); }
+html[data-bs-theme] .swal2-container.swal2-backdrop-show, html[data-bs-theme] .swal2-container.swal2-noanimation { background: var(--overlay) !important; }
+html[data-bs-theme] .swal2-input, html[data-bs-theme] .swal2-textarea, html[data-bs-theme] .swal2-select { background: var(--surface-input); color: var(--text); border: 1px solid var(--border-control); border-radius: var(--radius-md); }
+html[data-bs-theme] .swal2-validation-message { background: var(--danger-soft); color: var(--danger-text); }
+html[data-bs-theme] .swal2-timer-progress-bar { background: var(--primary); }
+html[data-bs-theme] .swal2-actions { gap: var(--space-2); }
+html[data-bs-theme] .swal2-icon.swal2-success { color: var(--success-solid); border-color: var(--success-solid); }
+html[data-bs-theme] .swal2-icon.swal2-success [class^="swal2-success-line"] { background-color: var(--success-solid); }
+html[data-bs-theme] .swal2-icon.swal2-success .swal2-success-ring { border-color: var(--success-solid); opacity: 0.3; }
+html[data-bs-theme] .swal2-icon.swal2-success [class^="swal2-success-circular-line"], html[data-bs-theme] .swal2-icon.swal2-success .swal2-success-fix { background: var(--surface-raised); }
+html[data-bs-theme] .swal2-icon.swal2-error { color: var(--danger-solid); border-color: var(--danger-solid); }
+html[data-bs-theme] .swal2-icon.swal2-error [class^="swal2-x-mark-line"] { background-color: var(--danger-solid); }
+html[data-bs-theme] .swal2-icon.swal2-warning { color: var(--warning-solid); border-color: var(--warning-solid); }
+html[data-bs-theme] .swal2-icon.swal2-info { color: var(--info-solid); border-color: var(--info-solid); }
+html[data-bs-theme] .swal2-icon.swal2-question { color: var(--text-muted); border-color: var(--text-muted); }

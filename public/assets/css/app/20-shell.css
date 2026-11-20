@@ -1,0 +1,304 @@
+/* ==========================================================================
+   20-shell.css — application frame: sidebar | (topbar / content).
+   Markup contract (includes/layout/*.php):
+     <div class="app">
+       <aside id="app-sidebar" class="app-sidebar"> .app-brand · nav.app-nav (.nav-group-title, ul.nav-list > li > a.nav-link-item) · .app-sidebar__foot
+       <div class="app-backdrop" data-drawer-close>
+       <div class="app-main"> header.app-topbar · main#app-content.app-content
+   State lives on <html>: data-sidebar="expanded|collapsed" (desktop rail) and data-drawer="open" (phone/tablet).
+   RTL: the first grid column is the inline-start edge, i.e. the RIGHT side. No physical left/right except the
+   documented exceptions (drawer translateX, tooltip position in app.js).
+   Do not put transform / filter / backdrop-filter / will-change on any ancestor of #builder-root or of a modal:
+   it would trap position:fixed descendants. The topbar is a SIBLING of the content, which is why its blur is safe.
+   ========================================================================== */
+
+.app {
+  display: grid;
+  grid-template-columns: var(--sidebar-w) minmax(0, 1fr);
+  min-block-size: 100vh;
+  transition: grid-template-columns var(--dur-3) var(--ease);
+}
+html[data-sidebar="collapsed"] .app { grid-template-columns: var(--sidebar-w-collapsed) minmax(0, 1fr); }
+
+/* ---- Sidebar ------------------------------------------------------------ */
+.app-sidebar {
+  position: sticky;
+  inset-block-start: 0;
+  block-size: 100vh;
+  block-size: 100dvh;
+  z-index: var(--z-sidebar);
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-3);
+  background: var(--surface-sidebar);
+  border-inline-end: 1px solid var(--border);
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.app-brand {
+  display: flex;
+  align-items: center;
+  min-block-size: var(--topbar-h);
+  margin-block-end: var(--space-2);
+  color: var(--text);
+  text-decoration: none;
+  white-space: nowrap;
+}
+/* The icon cell is exactly as wide as the collapsed rail's inner width, so icons never move while the sidebar animates. */
+.brand-mark {
+  flex: 0 0 3.25rem;
+  inline-size: 3.25rem;
+  display: grid;
+  place-items: center;
+}
+.brand-mark > i, .brand-mark > span {
+  display: grid;
+  place-items: center;
+  inline-size: 2.5rem;
+  block-size: 2.5rem;
+  border-radius: var(--radius-md);
+  background: var(--primary);
+  color: var(--on-primary);
+  font-size: 1.35rem;
+  transition: transform var(--dur-2) var(--ease);
+}
+.app-brand:hover .brand-mark > i, .app-brand:hover .brand-mark > span { transform: rotate(-6deg) scale(1.05); }
+.app-brand__text { display: flex; flex-direction: column; min-inline-size: 0; line-height: var(--lh-tight); }
+.app-brand__text strong { font-size: var(--fs-md); font-weight: var(--fw-bold); }
+.app-brand__text small { color: var(--text-muted); font-size: var(--fs-xs); overflow: hidden; text-overflow: ellipsis; }
+
+.app-nav { flex: 1 1 auto; display: flex; flex-direction: column; gap: var(--space-1); }
+.nav-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--space-1); }
+.nav-group-title {
+  margin: var(--space-4) 0 var(--space-1);
+  padding-inline: var(--space-3);
+  color: var(--text-faint);
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-semibold);
+  white-space: nowrap;
+}
+
+.nav-link-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-block-size: var(--control-h);
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: var(--nav-text);
+  font: inherit;
+  font-weight: var(--fw-medium);
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  inline-size: 100%;
+  text-align: start;
+  transition: background-color var(--dur-1) var(--ease), color var(--dur-1) var(--ease);
+}
+.nav-link-item > i {
+  flex: 0 0 3.25rem;
+  inline-size: 3.25rem;
+  text-align: center;
+  font-size: 1.3rem;
+  transition: transform var(--dur-2) var(--ease);
+}
+.nav-link-item:hover { background: var(--nav-hover-bg); color: var(--nav-hover-text); text-decoration: none; }
+.nav-link-item:hover > i { transform: scale(1.12); }
+.nav-link-item[aria-current="page"] { background: var(--nav-active-bg); color: var(--nav-active-text); font-weight: var(--fw-semibold); }
+/* Active indicator: a bar on the inline-start edge; it also shows in the collapsed rail. */
+.nav-link-item::before {
+  content: "";
+  position: absolute;
+  inset-inline-start: 0;
+  inset-block: 0.55rem;
+  inline-size: 3px;
+  border-radius: var(--radius-pill);
+  background: var(--nav-active-bar);
+  transform: scaleY(0);
+  transition: transform var(--dur-2) var(--ease);
+}
+.nav-link-item[aria-current="page"]::before { transform: scaleY(1); }
+.nav-link-item--danger:hover { background: var(--danger-soft); color: var(--danger-text); }
+
+.nav-label, .nav-group-title, .app-brand__text {
+  transition: opacity var(--dur-1) var(--ease) var(--dur-1);
+}
+.app-sidebar__foot { margin-block-start: var(--space-3); padding-block-start: var(--space-3); border-block-start: 1px solid var(--border); }
+
+/* ---- Collapsed rail (desktop) -------------------------------------------- */
+@media (min-width: 992px) {
+  html[data-sidebar="collapsed"] .nav-label,
+  html[data-sidebar="collapsed"] .nav-group-title,
+  html[data-sidebar="collapsed"] .app-brand__text {
+    opacity: 0;
+    pointer-events: none;
+    transition-delay: 0s;
+    transition-duration: 90ms;
+  }
+  html[data-sidebar="collapsed"] .nav-group-title { block-size: 1px; margin-block: var(--space-2); overflow: hidden; }
+}
+
+/* ---- Main column --------------------------------------------------------- */
+.app-main { display: flex; flex-direction: column; min-inline-size: 0; min-block-size: 100vh; }
+
+.app-topbar {
+  position: sticky;
+  inset-block-start: 0;
+  z-index: var(--z-topbar);
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-block-size: var(--topbar-h);
+  padding-inline: var(--space-6);
+  background: var(--surface-header);
+  border-block-end: 1px solid var(--border);
+}
+@supports (backdrop-filter: blur(1px)) and (background: color-mix(in srgb, red 50%, transparent)) {
+  .app-topbar {
+    background: color-mix(in srgb, var(--surface-header) 82%, transparent);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+  }
+}
+.app-topbar__titles { display: flex; flex-direction: column; min-inline-size: 0; line-height: var(--lh-tight); }
+.app-topbar__title { font-size: var(--fs-lg); font-weight: var(--fw-bold); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.app-topbar__crumb { margin: 0; padding: 0; list-style: none; display: flex; align-items: center; gap: var(--space-1); color: var(--text-muted); font-size: var(--fs-xs); white-space: nowrap; overflow: hidden; }
+/* Breadcrumb separator: a left-pointing chevron drawn as a mask, so it is never mirrored and needs no icon font.
+   In RTL the trail reads right to left (parent, then child), so the chevron points left, toward the child. */
+.crumbs li + li::before { content: ""; display: inline-block; inline-size: 0.8em; block-size: 0.8em; margin-inline-end: var(--space-1); vertical-align: middle; background: currentColor; -webkit-mask: var(--icon-chevron-left) center / contain no-repeat; mask: var(--icon-chevron-left) center / contain no-repeat; }
+.crumbs li[aria-current="page"] { color: var(--text); font-weight: var(--fw-medium); }
+:root { --icon-chevron-left: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m15 6-6 6 6 6'/%3E%3C/svg%3E"); }
+.app-topbar__spacer { flex: 1 1 auto; }
+.app-topbar__actions { display: flex; align-items: center; gap: var(--space-2); }
+
+.icon-btn {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  flex: 0 0 auto;
+  inline-size: var(--icon-btn);
+  block-size: var(--icon-btn);
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 1.3rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: background-color var(--dur-1) var(--ease), color var(--dur-1) var(--ease), transform var(--dur-1) var(--ease);
+}
+.icon-btn:hover { background: var(--surface-3); color: var(--text); }
+.icon-btn:active { transform: scale(0.97); }
+.icon-btn__badge {
+  position: absolute;
+  inset-block-start: 0.2rem;
+  inset-inline-end: 0.2rem;
+  min-inline-size: 1.1rem;
+  block-size: 1.1rem;
+  padding-inline: 0.25rem;
+  border-radius: var(--radius-pill);
+  background: var(--danger-solid);
+  color: var(--on-danger);
+  font-size: 0.65rem;
+  font-weight: var(--fw-bold);
+  line-height: 1.1rem;
+  text-align: center;
+}
+/* Sun and moon swap by theme; the button's aria-label always names the action, never the state. */
+.theme-toggle .ti-sun, .theme-toggle .icon-sun { display: none; }
+html[data-bs-theme="dark"] .theme-toggle .ti-sun, html[data-bs-theme="dark"] .theme-toggle .icon-sun { display: inline; }
+html[data-bs-theme="dark"] .theme-toggle .ti-moon, html[data-bs-theme="dark"] .theme-toggle .icon-moon { display: none; }
+/* The sidebar toggle's chevron points toward the side the sidebar will move to. */
+[data-sidebar-toggle] .menu-icon { display: none; }
+[data-sidebar-toggle] .toggle-icon { transition: transform var(--dur-3) var(--ease); }
+@media (min-width: 992px) { html[data-sidebar="collapsed"] [data-sidebar-toggle] .toggle-icon { transform: scaleX(-1); } }
+
+.user-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-1) var(--space-2);
+  border: 1px solid transparent;
+  border-radius: var(--radius-pill);
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  cursor: pointer;
+  transition: background-color var(--dur-1) var(--ease);
+}
+.user-chip:hover { background: var(--surface-3); }
+.user-chip__avatar { display: inline-block; inline-size: 2.25rem; block-size: 2.25rem; border-radius: 50%; object-fit: cover; border: 2px solid var(--border-strong); background: var(--surface-3); }
+.user-chip__text { display: flex; flex-direction: column; text-align: start; line-height: var(--lh-tight); }
+.user-chip__name { font-size: var(--fs-sm); font-weight: var(--fw-semibold); }
+.user-chip__role { color: var(--text-muted); font-size: var(--fs-xs); }
+
+.app-content {
+  flex: 1 1 auto;
+  inline-size: 100%;
+  max-inline-size: var(--content-max);
+  margin-inline: auto;
+  padding: var(--space-6);
+}
+.app-content > * + * { margin-block-start: var(--space-5); }
+
+.app-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-backdrop);
+  background: var(--overlay);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--dur-2) var(--ease), visibility var(--dur-2) var(--ease);
+}
+
+/* ---- Tooltip (one element, created by PanelUI) ---------------------------- */
+.app-tip {
+  position: fixed;
+  z-index: var(--z-tip);
+  max-inline-size: 16rem;
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-sm);
+  background: var(--tip-bg);
+  color: var(--tip-text);
+  font-size: var(--fs-sm);
+  line-height: var(--lh-tight);
+  box-shadow: var(--shadow-2);
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 120ms var(--ease) 90ms, visibility 0s linear 210ms;
+}
+.app-tip.is-visible { opacity: 1; visibility: visible; transition-delay: 90ms, 0s; }
+
+/* ---- Tablet / phone: the sidebar becomes a drawer --------------------------- */
+@media (max-width: 991.98px) {
+  .app, html[data-sidebar="collapsed"] .app { grid-template-columns: minmax(0, 1fr); }
+  .app-sidebar {
+    position: fixed;
+    inset-block: 0;
+    inset-inline-start: 0;
+    inline-size: min(19rem, 86vw);
+    z-index: var(--z-drawer);
+    /* Documented physical exception: the drawer leaves through the inline-start edge, which is the right side in RTL. */
+    transform: translateX(100%);
+    visibility: hidden;
+    box-shadow: var(--shadow-3);
+    transition: transform var(--dur-3) var(--ease), visibility var(--dur-3) var(--ease);
+  }
+  html[dir="ltr"] .app-sidebar { transform: translateX(-100%); }
+  html[data-drawer="open"] .app-sidebar { transform: none; visibility: visible; }
+  html[data-drawer="open"] .app-backdrop { opacity: 1; visibility: visible; }
+  html[data-drawer="open"] { overflow: hidden; }
+  .app-topbar { padding-inline: var(--space-4); }
+  .app-content { padding: var(--space-4); }
+  .user-chip__text { display: none; }
+  [data-sidebar-toggle] .toggle-icon { display: none; }
+  [data-sidebar-toggle] .menu-icon { display: inline; }
+}
+@media (max-width: 575.98px) {
+  .app-topbar__crumb { display: none; }
+}

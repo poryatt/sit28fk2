@@ -1,0 +1,23 @@
+D01 [PASS] impossible permission rows: 0 (expect 0)
+D02 [PASS] staff with no permission row: 0 (expect 0)
+D03 [PASS] accounts with seed password: 0
+D04 [PASS] CHECK chk_pup_logic present
+D05 [PASS] usernames violating policy: 0
+D06 [INFO] login_attempts=94 oldest=2026-10-10 08:07:07; activity_logs=178 oldest=2026-09-18 21:12:34
+D07 [PASS] inconsistent canvases: 0 (expect 0)
+D08 [PASS] blocks with parent in another canvas: 0 (expect 0)
+D09 [PASS] duplicate sort_order groups: 0 (expect 0)
+D10 [INFO] canvases with root count <> 3: 0 (0 roots is legal; load supplies the default tree)
+D11 [PASS] FK delete rules match the expected map
+D12 [PASS] duplicate (purpose,sha256) groups: 0 (expect 0)
+D13 [INFO] media rows with NULL sha256: 1 (run the backfill tool to reduce)
+D14 [PASS] licence certificates under /uploads/: 0 (expect 0)
+D15 [PASS] legacy tables gone
+D16 [PASS] templates.is_active absent; active_template_id valid
+D17 [PASS] template_categories with slug 'all': 0 (expect 0)
+D18 [PASS] no plaintext secrets
+D19 [PASS] both hashes are bcrypt cost 10
+D20 [PASS] removed staff with avatar/permission rows: 0 (expect 0)
+D21 [PASS] block_uid ascii_bin; canvases.version exists
+D22 [INFO] all 1 public asset path(s) registered
+summary: 22 check(s), 0 FAIL

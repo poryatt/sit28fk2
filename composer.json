@@ -1,0 +1,11 @@
+{
+    "name": "business/panel",
+    "require": {
+        "php": ">=8.0",
+        "morilog/jalali": "^3.0",
+        "phpmailer/phpmailer": "^6.9"
+    },
+    "autoload": {
+        "files": ["includes/functions.php"]
+    }
+}

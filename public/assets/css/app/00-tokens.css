@@ -1,0 +1,254 @@
+/* ==========================================================================
+   00-tokens.css — THE ONLY FILE THAT MAY CONTAIN COLOR LITERALS, RADII, SHADOWS,
+   DURATIONS, SIZES AND Z-INDEXES. Everything else reads these variables.
+   Themes are keyed on <html data-bs-theme="light|dark"> (Bootstrap 5.3 reads the same attribute).
+   Light = soft blue. Dark = neutral graphite with a white accent (designed on its own, not an
+   inverted light theme). No purple / violet anywhere.
+   Every text/background and control-border/focus pair is audited by tests/ui/check_tokens.py
+   (WCAG 2.2 AA: 4.5:1 text, 3:1 large text, UI-component borders and focus ring).
+   ========================================================================== */
+
+:root,
+[data-bs-theme="light"] {
+  color-scheme: light;
+
+  /* surfaces */
+  --bg: #f3f6fc;                 /* page */
+  --bg-subtle: #eaeff9;          /* section bands, zebra rows, hover fill */
+  --surface: #ffffff;            /* cards, panels, table */
+  --surface-2: #f8faff;          /* nested panel inside a card, table header */
+  --surface-3: #eaeff9;          /* hover / pressed fill on a surface */
+  --surface-sidebar: #ffffff;
+  --surface-header: #ffffff;     /* topbar (blurred through color-mix in 20-shell) */
+  --surface-raised: #ffffff;     /* dropdown, popover, modal, swal */
+  --surface-input: #ffffff;      /* input / select / textarea */
+  --overlay: rgba(15, 27, 51, 0.45);
+
+  /* text */
+  --text: #0f1b33;               /* body + headings */
+  --text-heading: #0f1b33;
+  --text-label: #1b2a47;         /* form labels */
+  --text-muted: #46556f;         /* secondary text */
+  --text-faint: #566580;         /* tertiary text, hints, captions */
+  --text-hint: #566580;
+  --text-placeholder: #5d6b85;
+  --text-disabled: #74829c;      /* WCAG exempts inactive controls, but we keep >= 3:1 anyway; disabled is never color-only */
+  --text-link: #1d4ed8;
+
+  /* lines */
+  --border: #dbe3f1;             /* decorative separators (cards, dividers) */
+  --border-strong: #c3cde0;
+  --border-control: #7a88a3;     /* inputs, selects, checkboxes: >= 3:1 on surface and bg */
+  --border-control-hover: #5d6b85;
+  --focus-ring: #2563eb;
+
+  /* primary */
+  --primary: #2563eb;
+  --primary-hover: #1d4ed8;
+  --primary-active: #1e40af;
+  --on-primary: #ffffff;
+  --primary-soft: #e6eeff;
+  --primary-soft-text: #1d4ed8;
+
+  /* secondary button */
+  --secondary-bg: #ffffff;
+  --secondary-bg-hover: #eaeff9;
+  --secondary-text: #1b2a47;
+  --secondary-border: #7a88a3;
+
+  /* status: solid (buttons, icons on neutral) and soft (badges, alerts) */
+  --success-solid: #15803d;  --on-success: #ffffff;  --success-soft: #e3f6ea;  --success-text: #0a6b36;
+  --warning-solid: #b45309;  --on-warning: #ffffff;  --warning-soft: #fff4dc;  --warning-text: #8a5300;
+  --danger-solid:  #c62828;  --on-danger:  #ffffff;  --danger-soft:  #fde8e6;  --danger-text:  #b42318;
+  --info-solid:    #0369a1;  --on-info:    #ffffff;  --info-soft:    #e1f1fd;  --info-text:    #0b5e9e;
+  --muted-soft: #eaeff9;     --muted-soft-text: #46556f;
+
+  /* sidebar navigation */
+  --nav-text: #46556f;
+  --nav-hover-bg: #eaeff9;
+  --nav-hover-text: #0f1b33;
+  --nav-active-bg: #e6eeff;
+  --nav-active-text: #1d4ed8;
+  --nav-active-bar: #2563eb;
+
+  /* tooltip (inverted so it works on any surface) */
+  --tip-bg: #0f1b33;
+  --tip-text: #ffffff;
+
+  /* media viewer (fullscreen story / slider preview in the builder): ALWAYS dark, in both themes, because it is a lightbox over the page */
+  --viewer-scrim: rgba(0, 0, 0, 0.82);
+  --viewer-surface: #111111;
+  --viewer-stage: #000000;
+  --viewer-fg: #ffffff;
+  --viewer-control-bg: #ececec;
+  --viewer-control-fg: #111111;
+  --viewer-track: rgba(255, 255, 255, 0.35);
+
+  /* decorative */
+  --glow-1: rgba(37, 99, 235, 0.14);
+  --glow-2: rgba(14, 165, 233, 0.10);
+  --selection-bg: #cfe0ff;
+  --skeleton-1: #e6ecf7;
+  --skeleton-2: #f4f7fd;
+  --shadow-1: 0 1px 2px rgba(15, 27, 51, 0.06), 0 1px 3px rgba(15, 27, 51, 0.06);
+  --shadow-2: 0 4px 12px rgba(15, 27, 51, 0.08), 0 2px 4px rgba(15, 27, 51, 0.05);
+  --shadow-3: 0 16px 40px rgba(15, 27, 51, 0.16);
+
+  /* RGB triplets for Bootstrap's rgba(var(--bs-*-rgb), a) utilities. Must equal the hex tokens: tests/ui/check_tokens.py verifies. */
+  --rgb-text: 15,27,51;
+  --rgb-bg: 243,246,252;
+  --rgb-primary: 37,99,235;
+  --rgb-success: 21,128,61;
+  --rgb-warning: 180,83,9;
+  --rgb-danger: 198,40,40;
+  --rgb-info: 3,105,161;
+  --rgb-focus: 37,99,235;
+}
+
+[data-bs-theme="dark"] {
+  color-scheme: dark;
+
+  --bg: #09090b;
+  --bg-subtle: #0f0f12;
+  --surface: #111114;
+  --surface-2: #17171b;
+  --surface-3: #1f1f25;
+  --surface-sidebar: #0d0d10;
+  --surface-header: #0d0d10;
+  --surface-raised: #17171b;
+  --surface-input: #0b0b0e;
+  --overlay: rgba(0, 0, 0, 0.62);
+
+  --text: #f4f4f6;
+  --text-heading: #ffffff;
+  --text-label: #e4e4ea;
+  --text-muted: #b4b4bf;
+  --text-faint: #a3a3af;
+  --text-hint: #a3a3af;
+  --text-placeholder: #9d9da9;
+  --text-disabled: #82828e;
+  --text-link: #a5c4ff;
+
+  --border: #2a2a31;
+  --border-strong: #3a3a43;
+  --border-control: #7d7d8b;
+  --border-control-hover: #a3a3af;
+  --focus-ring: #f4f4f6;
+
+  --primary: #f4f4f6;
+  --primary-hover: #ffffff;
+  --primary-active: #d4d4da;
+  --on-primary: #0b0b0d;
+  --primary-soft: #26262d;
+  --primary-soft-text: #f4f4f6;
+
+  --secondary-bg: #1f1f25;
+  --secondary-bg-hover: #2a2a31;
+  --secondary-text: #f4f4f6;
+  --secondary-border: #7d7d8b;
+
+  --success-solid: #4ade80;  --on-success: #05200f;  --success-soft: #12301f;  --success-text: #7fe0a3;
+  --warning-solid: #f5b942;  --on-warning: #2b1d00;  --warning-soft: #35270a;  --warning-text: #f2c15b;
+  --danger-solid:  #ff7b84;  --on-danger:  #2a0508;  --danger-soft:  #3a1517;  --danger-text:  #ff9a9a;
+  --info-solid:    #6cb6ff;  --on-info:    #04182b;  --info-soft:    #10283d;  --info-text:    #8cc8ff;
+  --muted-soft: #24242b;     --muted-soft-text: #b4b4bf;
+
+  --nav-text: #b4b4bf;
+  --nav-hover-bg: #1a1a1f;
+  --nav-hover-text: #ffffff;
+  --nav-active-bg: #26262d;
+  --nav-active-text: #ffffff;
+  --nav-active-bar: #f4f4f6;
+
+  --tip-bg: #f4f4f6;
+  --tip-text: #0b0b0d;
+
+  /* media viewer (fullscreen story / slider preview in the builder): same values as the light theme */
+  --viewer-scrim: rgba(0, 0, 0, 0.82);
+  --viewer-surface: #111111;
+  --viewer-stage: #000000;
+  --viewer-fg: #ffffff;
+  --viewer-control-bg: #ececec;
+  --viewer-control-fg: #111111;
+  --viewer-track: rgba(255, 255, 255, 0.35);
+
+  --glow-1: rgba(255, 255, 255, 0.05);
+  --glow-2: rgba(255, 255, 255, 0.025);
+  --selection-bg: #3a3a43;
+  --skeleton-1: #1a1a1f;
+  --skeleton-2: #26262d;
+  --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.5);
+  --shadow-2: 0 6px 16px rgba(0, 0, 0, 0.5);
+  --shadow-3: 0 20px 48px rgba(0, 0, 0, 0.65);
+
+  /* RGB triplets for Bootstrap's rgba(var(--bs-*-rgb), a) utilities. Must equal the hex tokens: tests/ui/check_tokens.py verifies. */
+  --rgb-text: 244,244,246;
+  --rgb-bg: 9,9,11;
+  --rgb-primary: 244,244,246;
+  --rgb-success: 74,222,128;
+  --rgb-warning: 245,185,66;
+  --rgb-danger: 255,123,132;
+  --rgb-info: 108,182,255;
+  --rgb-focus: 244,244,246;
+}
+
+/* Non-color tokens: identical in both themes. */
+:root {
+  /* typography */
+  --font-sans: "Vazirmatn", "Segoe UI", Tahoma, system-ui, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Consolas, monospace;
+  --fs-xs: 0.75rem;
+  --fs-sm: 0.8125rem;
+  --fs-md: 0.9375rem;      /* base: 15px */
+  --fs-lg: 1.0625rem;
+  --fs-xl: 1.25rem;
+  --fs-2xl: 1.625rem;
+  --lh-body: 1.75;         /* Persian needs air */
+  --lh-tight: 1.4;
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+
+  /* space (4px grid) */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+
+  /* shape */
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-pill: 999px;
+
+  /* sizes */
+  --sidebar-w: 17rem;            /* 272px */
+  --sidebar-w-collapsed: 4.75rem; /* 76px */
+  --topbar-h: 4rem;              /* 64px: builder sticky offset derives from this */
+  --content-max: 90rem;          /* 1440px */
+  --control-h: 2.75rem;          /* 44px: minimum touch target */
+  --control-h-sm: 2.25rem;
+  --icon-btn: 2.5rem;
+  --focus-width: 3px;
+  --focus-offset: 2px;
+
+  /* motion */
+  --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --dur-1: 140ms;
+  --dur-2: 240ms;
+  --dur-3: 360ms;
+
+  /* z-index scale. Bootstrap: dropdown 1000, sticky 1020, fixed 1030, modal-backdrop 1050, modal 1055, popover 1070,
+     tooltip 1080. Builder chrome: settings 1040, insert 1045, toolbar 1050, media picker 1070, story viewer 2000.
+     SweetAlert2 uses 1060. */
+  --z-sidebar: 1020;
+  --z-topbar: 1030;
+  --z-backdrop: 1052;
+  --z-drawer: 1053;
+  --z-tip: 1085;
+}

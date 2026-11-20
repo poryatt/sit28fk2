@@ -1,0 +1,14 @@
+{
+  "globals": {
+    "BuilderRegistry": ["getAllBlockTypes", "getBlockType", "getInsertableBlockTypes", "hasBlockType", "registerBlockType"],
+    "BuilderCore": ["createColumnContainer", "createNode", "createUid", "defaultTree", "findByUid", "walkTree"],
+    "BuilderTree": ["checkInsert", "countNodes", "deepestDepth", "isStructuralName", "isStructuralRootName", "limits", "locate", "subtreeHeight", "subtreeSize"],
+    "BuilderShell": ["canEdit", "getCanvas", "getTree", "isDirty", "markClean", "markDirty", "save", "setCanvasController"],
+    "BuilderCanvas": ["clearSelection", "getBlockElement", "getCanvasElement", "getNode", "getSelected", "getToolbarElement", "getTree", "insertBlock", "moveBlock", "refreshBlock", "registerFormatCommand", "removeBlock", "select", "setFormatState", "updateBlockData"],
+    "BuilderSettingsPanel": ["getOpenUid", "isOpen"],
+    "BuilderInsertMenu": ["getAnchorParentUid", "isOpen"],
+    "BuilderMediaPicker": ["close", "field", "getInfo", "open", "upload"],
+    "BuilderPreview": [],
+    "BuilderStoryViewer": []
+  }
+}

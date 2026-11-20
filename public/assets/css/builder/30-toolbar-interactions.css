@@ -1,0 +1,170 @@
+/* Block toolbar interactions: settings panel + insert menu (Part 3).
+ * Loaded after 20-canvas.css by Part 1's alphabetical CSS glob.
+ * Reuses only the four 10-shell.css custom properties named in the master
+ * prompt (--builder-surface, --builder-border, --builder-muted,
+ * --builder-canvas-bg). Everything else this file needs - including its own
+ * hover colour - is defined locally below, so this part never depends on
+ * 20-canvas.css's custom properties (--builder-canvas-hover belongs to
+ * Part 2 and is out of scope for reuse here). Never hard-codes colours.
+ * Namespaces: .builder-settings-* (panel) and .builder-insert-* (dropdown). */
+
+#builder-root {
+  --builder-settings-width: 340px;
+  --builder-settings-max-width: 92vw;
+  --builder-insert-menu-width: 220px;
+  --builder-toolbar-hover-bg: var(--surface-3);
+}
+
+/* ======= Settings Panel ======= */
+
+.builder-settings-panel {
+  position: fixed;
+  z-index: 1040;
+  background-color: var(--builder-surface);
+  border: 1px solid var(--builder-border);
+  box-shadow: var(--shadow-3);
+  /* Kept as block: the JS previously forced display:block inline (Part 9). */
+  display: block;
+  flex-direction: column;
+  font-size: 0.875rem;
+  max-height: 100vh;
+  overflow: hidden;
+}
+
+.builder-settings-panel--drawer {
+  inset-inline-end: 0;
+  top: var(--builder-sticky-top);
+  bottom: 0;
+  width: var(--builder-settings-width);
+  max-width: var(--builder-settings-max-width);
+  border-radius: 0;
+  border-inline-start-width: 1px;
+}
+
+.builder-settings-panel--sheet {
+  inset-inline: 0;
+  bottom: 0;
+  max-height: 70vh;
+  border-radius: 0.75rem 0.75rem 0 0;
+  border-bottom-width: 0;
+}
+
+.builder-settings-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--builder-border);
+  flex-shrink: 0;
+}
+
+.builder-settings-panel-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  color: inherit;
+  white-space: nowrap;
+  overflow: hidden;
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.builder-settings-panel-icon {
+  font-size: 1rem;
+  color: var(--builder-muted);
+  flex-shrink: 0;
+}
+
+.builder-settings-panel-title-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.builder-settings-panel-close {
+  background: transparent;
+  border: 0;
+  border-radius: 0.25rem;
+  color: var(--builder-muted);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  line-height: 1;
+  padding: 0;
+}
+
+.builder-settings-panel-close:hover {
+  background-color: var(--builder-toolbar-hover-bg);
+  color: inherit;
+}
+
+.builder-settings-panel-body {
+  overflow-y: auto;
+  padding: 1rem;
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+/* ======= Insert Menu ======= */
+
+.builder-insert-menu {
+  position: fixed;
+  z-index: 1045;
+  background-color: var(--builder-surface);
+  border: 1px solid var(--builder-border);
+  border-radius: 0.5rem;
+  box-shadow: var(--shadow-3);
+  min-width: var(--builder-insert-menu-width);
+  max-width: 90vw;
+  max-height: 60vh;
+  overflow-y: auto;
+  font-size: 0.875rem;
+}
+
+.builder-insert-menu-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  color: inherit;
+  cursor: pointer;
+  padding: 0.5rem 0.75rem;
+  text-align: start;
+  white-space: nowrap;
+}
+
+.builder-insert-menu-item:first-child {
+  border-radius: 0.5rem 0.5rem 0 0;
+}
+
+.builder-insert-menu-item:last-child {
+  border-radius: 0 0 0.5rem 0.5rem;
+}
+
+.builder-insert-menu-item:hover {
+  background-color: var(--builder-toolbar-hover-bg);
+}
+
+.builder-insert-menu-item i {
+  font-size: 1rem;
+  color: var(--builder-muted);
+  flex-shrink: 0;
+}
+
+.builder-insert-menu-item:hover i {
+  color: inherit;
+}
+
+.builder-insert-menu-empty {
+  color: var(--builder-muted);
+  padding: 1rem;
+  text-align: center;
+  font-size: 0.85rem;
+}

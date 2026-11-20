@@ -1,0 +1,15 @@
+# Nothing in this folder may ever execute.
+<IfModule mod_php.c>
+  php_flag engine off
+</IfModule>
+<IfModule mod_mime.c>
+  RemoveHandler .php .phtml .php3
+</IfModule>
+<FilesMatch "\.(php|phtml|php3|php4|php5|php7|phps|phar)$">
+  Require all denied
+</FilesMatch>
+Options -Indexes -ExecCGI
+<IfModule mod_headers.c>
+  Header set X-Content-Type-Options "nosniff"
+  Header set Content-Security-Policy "default-src 'none'; img-src 'self' data:; media-src 'self'; style-src 'unsafe-inline'; sandbox"
+</IfModule>

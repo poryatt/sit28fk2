@@ -1,0 +1,8 @@
+Options -Indexes
+# Never serve dotfiles or tooling/documentation files that may end up under public/ by mistake
+<FilesMatch "^\.">
+    Require all denied
+</FilesMatch>
+<FilesMatch "\.(md|sql|log|lock|bak|ini|dist|sh|yml|yaml|env)$">
+    Require all denied
+</FilesMatch>

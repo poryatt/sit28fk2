@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" data-bs-theme="light" data-sidebar="expanded" data-theme-url="">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>راهنمای رابط کاربری</title>
+<script src="/ui-kit/kit.js"></script>
+<link rel="stylesheet" href="/assets/vendor/bootstrap/5.3.3/css/bootstrap.rtl.min.css" data-cdn="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css">
+<link rel="stylesheet" href="/assets/vendor/tabler-icons/3.49.0/tabler-icons.min.css" data-cdn="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.49.0/dist/tabler-icons.min.css">
+<link rel="stylesheet" href="/assets/css/app/00-tokens.css">
+<link rel="stylesheet" href="/assets/css/app/05-fonts.css">
+<link rel="stylesheet" href="/assets/css/app/10-base.css">
+<link rel="stylesheet" href="/assets/css/app/20-shell.css">
+<link rel="stylesheet" href="/assets/css/app/30-bootstrap-bridge.css">
+<link rel="stylesheet" href="/assets/css/app/35-components.css">
+<link rel="stylesheet" href="/assets/css/app/40-motion.css">
+<link rel="stylesheet" href="/assets/css/app/45-pages.css">
+<link rel="stylesheet" href="/assets/css/app/50-auth.css">
+<script src="/assets/js/app.js" defer></script>
+<script src="/assets/vendor/bootstrap/5.3.3/js/bootstrap.bundle.min.js" data-cdn="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
+</head>
+<body>
+<a class="skip-link visually-hidden-focusable" href="#app-content">رفتن به محتوای اصلی</a>
+<div class="app">
+  <aside id="app-sidebar" class="app-sidebar" aria-label="منوی اصلی">
+    <a class="app-brand" href="#app-content">
+      <span class="brand-mark"><i class="ti ti-layout-dashboard"></i></span>
+      <span class="app-brand__text"><strong>پنل مدیریت</strong><small>وب‌سایت من</small></span>
+    </a>
+    <nav class="app-nav" aria-label="منوی اصلی">
+      <p class="nav-group-title">مدیریت</p>
+      <ul class="nav-list">
+        <li><a class="nav-link-item" href="#app-content" aria-current="page" data-tip="پیشخوان"><i class="ti ti-layout-dashboard"></i><span class="nav-label">پیشخوان</span></a></li>
+        <li><a class="nav-link-item" href="#forms" data-tip="ساخت سایت"><i class="ti ti-layout-grid"></i><span class="nav-label">ساخت سایت</span></a></li>
+        <li><a class="nav-link-item" href="#tables" data-tip="صفحات ساخته شده"><i class="ti ti-files"></i><span class="nav-label">صفحات ساخته شده</span></a></li>
+        <li><a class="nav-link-item" href="#feedback" data-tip="قالب سایت"><i class="ti ti-palette"></i><span class="nav-label">قالب سایت</span></a></li>
+        <li><a class="nav-link-item" href="#upload" data-tip="رسانه و عکس‌ها"><i class="ti ti-photo"></i><span class="nav-label">رسانه و عکس‌ها</span></a></li>
+        <li><a class="nav-link-item" href="#settings" data-tip="مجوزات"><i class="ti ti-certificate"></i><span class="nav-label">مجوزات</span></a></li>
+      </ul>
+      <p class="nav-group-title">تنظیمات پنل</p>
+      <ul class="nav-list">
+        <li><a class="nav-link-item" href="#settings" data-tip="پروفایل من"><i class="ti ti-user-circle"></i><span class="nav-label">پروفایل من</span></a></li>
+        <li><a class="nav-link-item" href="#settings" data-tip="تنظیمات عمومی"><i class="ti ti-adjustments-horizontal"></i><span class="nav-label">تنظیمات عمومی</span></a></li>
+        <li><a class="nav-link-item" href="#settings" data-tip="کاربران و دسترسی‌ها"><i class="ti ti-users"></i><span class="nav-label">کاربران و دسترسی‌ها</span></a></li>
+      </ul>
+    </nav>
+    <div class="app-sidebar__foot">
+      <a class="nav-link-item nav-link-item--danger" href="#app-content" data-tip="خروج از حساب"><i class="ti ti-logout"></i><span class="nav-label">خروج از حساب</span></a>
+    </div>
+  </aside>
+  <div class="app-backdrop" data-drawer-close></div>
+  <div class="app-main">
+    <header class="app-topbar">
+      <button type="button" class="icon-btn" data-sidebar-toggle aria-controls="app-sidebar" aria-expanded="true" aria-label="جمع کردن یا باز کردن منو"><i class="ti ti-layout-sidebar-right-collapse toggle-icon"></i><i class="ti ti-menu-2 menu-icon"></i></button>
+      <div class="app-topbar__titles">
+        <h1 class="app-topbar__title">راهنمای رابط کاربری</h1>
+        <ol class="app-topbar__crumb crumbs" aria-label="مسیر صفحه"><li>پیشخوان</li><li aria-current="page">راهنمای رابط کاربری</li></ol>
+      </div>
+      <span class="app-topbar__spacer"></span>
+      <div class="app-topbar__actions">
+        <button type="button" class="icon-btn theme-toggle" data-theme-toggle aria-pressed="false" aria-label="تغییر تم" data-tip="تغییر تم" data-tip-pos="bottom"><i class="ti ti-moon"></i><i class="ti ti-sun"></i></button>
+        <button type="button" class="icon-btn" aria-label="اعلان‌ها" data-tip="اعلان‌ها" data-tip-pos="bottom"><i class="ti ti-bell"></i><span class="icon-btn__badge">۳</span></button>
+        <button type="button" class="user-chip" aria-label="حساب کاربری"><span class="user-chip__avatar" role="img" aria-label="تصویر کاربر"></span><span class="user-chip__text"><span class="user-chip__name">پویا</span><span class="user-chip__role">مالک</span></span></button>
+      </div>
+    </header>
+    <main class="app-content" id="app-content" tabindex="-1">
+      <div class="page-head">
+        <p class="page-head__lead">نمونه زنده همهٔ اجزای مشترک پنل؛ هر تغییر در فایل‌های CSS همین‌جا دیده می‌شود.</p>
+        <div class="page-head__actions">
+          <button type="button" class="btn btn-primary"><i class="ti ti-plus"></i>ساخت صفحه جدید</button>
+          <button type="button" class="btn btn-outline-secondary"><i class="ti ti-upload"></i>آپلود رسانه</button>
+        </div>
+      </div>
+
+      <div class="row g-3 stagger" id="stats">
+        <div class="col-12 col-sm-6 col-xl-3"><div class="card stat hover-lift"><span class="stat__icon"><i class="ti ti-files"></i></span><div class="stat__body"><p class="stat__label">صفحات ساخته شده</p><p class="stat__value" data-countup="12">۱۲</p><p class="stat__hint">+۲ عدد نسبت به هفته گذشته</p></div></div></div>
+        <div class="col-12 col-sm-6 col-xl-3"><div class="card stat stat--success hover-lift"><span class="stat__icon"><i class="ti ti-circle-check"></i></span><div class="stat__body"><p class="stat__label">صفحات منتشرشده</p><p class="stat__value" data-countup="9">۹</p><p class="stat__hint">از ۱۲ صفحه</p></div></div></div>
+        <div class="col-12 col-sm-6 col-xl-3"><div class="card stat stat--info hover-lift"><span class="stat__icon"><i class="ti ti-palette"></i></span><div class="stat__body"><p class="stat__label">قالب فعال</p><p class="stat__value">آریا</p><p class="stat__hint">نسخه ۱٫۲</p></div></div></div>
+        <div class="col-12 col-sm-6 col-xl-3"><div class="card stat stat--warning hover-lift"><span class="stat__icon"><i class="ti ti-heart-rate-monitor"></i></span><div class="stat__body"><p class="stat__label">وضعیت سیستم</p><p class="stat__value">نیاز به بررسی</p><p class="stat__hint">فضای دیسک را بررسی کنید</p></div></div></div>
+      </div>
+
+      <section class="card table-card" id="tables" aria-labelledby="tables-title">
+        <div class="card-head"><h2 class="card-head__title" id="tables-title">آخرین صفحه‌ها</h2><a href="#tables">مشاهده همه</a></div>
+        <div class="toolbar card-pad">
+          <label class="toolbar__grow input-icon"><i class="ti ti-search"></i><input type="search" class="form-control" placeholder="جستجو بر اساس عنوان یا نشانی..." aria-label="جستجو"></label>
+          <ul class="nav nav-pills"><li class="nav-item"><a class="nav-link active" href="#tables">همه (۱۲)</a></li><li class="nav-item"><a class="nav-link" href="#tables">منتشر شده (۹)</a></li><li class="nav-item"><a class="nav-link" href="#tables">پیش‌نویس (۳)</a></li></ul>
+        </div>
+        <div class="table-responsive">
+          <table class="table table-hover align-middle mb-0">
+            <thead><tr><th>عنوان</th><th>نشانی</th><th>وضعیت</th><th>آخرین به‌روزرسانی</th><th>عملیات</th></tr></thead>
+            <tbody>
+              <tr><td class="cell-title">صفحه نخست</td><td><span class="cell-slug">home</span></td><td><span class="badge-soft badge-soft-success"><i class="ti ti-circle-check"></i>منتشر شده</span></td><td>۱۴۰۵/۰۷/۲۶</td><td><div class="cell-actions"><a class="btn btn-sm btn-outline-secondary" href="#tables" aria-label="ویرایش" data-tip="ویرایش"><i class="ti ti-edit"></i></a><a class="btn btn-sm btn-outline-secondary" href="#tables" aria-label="پیش‌نمایش" data-tip="پیش‌نمایش"><i class="ti ti-external-link"></i></a><button type="button" class="btn btn-sm btn-outline-danger" aria-label="حذف" data-tip="حذف"><i class="ti ti-trash"></i></button></div></td></tr>
+              <tr><td class="cell-title">دربارهٔ ما</td><td><span class="cell-slug">about-us</span></td><td><span class="badge-soft badge-soft-muted"><i class="ti ti-pencil"></i>پیش‌نویس</span></td><td>۱۴۰۵/۰۷/۲۴</td><td><div class="cell-actions"><a class="btn btn-sm btn-outline-secondary" href="#tables" aria-label="ویرایش"><i class="ti ti-edit"></i></a></div></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <div class="row g-3" id="forms">
+        <div class="col-12 col-lg-7">
+          <section class="card" aria-labelledby="form-title">
+            <div class="card-head"><h2 class="card-head__title" id="form-title">فرم نمونه</h2><p class="card-head__hint">برچسب، ورودی، راهنما</p></div>
+            <form class="card-pad">
+              <div class="form-grid">
+                <div class="field"><label class="field__label" for="k-name">نام و نام خانوادگی</label><input id="k-name" class="form-control" placeholder="نام خود را وارد کنید" autocomplete="name"><p class="field__hint">همان نامی که در پنل نمایش داده می‌شود.</p></div>
+                <div class="field"><label class="field__label" for="k-user">نام کاربری</label><input id="k-user" class="form-control input-ltr" placeholder="نام کاربری خود را وارد کنید" autocomplete="username"></div>
+                <div class="field"><label class="field__label" for="k-email">ایمیل</label><input id="k-email" type="email" class="form-control" placeholder="ایمیل خود را وارد کنید" autocomplete="email"></div>
+                <div class="field"><label class="field__label" for="k-pass">رمز عبور</label><span class="input-icon input-icon--action"><i class="ti ti-lock"></i><input id="k-pass" type="password" class="form-control" placeholder="رمز عبور را وارد کنید" autocomplete="new-password"><button type="button" class="icon-btn" data-password-toggle aria-pressed="false" aria-label="نمایش رمز عبور" data-label-show="نمایش رمز عبور" data-label-hide="پنهان کردن رمز عبور"><i class="ti ti-eye"></i></button></span></div>
+                <div class="field"><label class="field__label" for="k-sel">وضعیت</label><select id="k-sel" class="form-select"><option>منتشر شده</option><option>پیش‌نویس</option></select></div>
+                <div class="field"><label class="field__label" for="k-bad">فیلد دارای خطا</label><input id="k-bad" class="form-control is-invalid" value="abc" aria-invalid="true" aria-describedby="k-bad-err"><p class="field__error" id="k-bad-err">مقدار واردشده معتبر نیست.</p></div>
+                <div class="field"><label class="field__label" for="k-dis">فیلد غیرفعال</label><input id="k-dis" class="form-control" value="قابل ویرایش نیست" disabled></div>
+                <div class="field field--wide"><label class="field__label" for="k-ta">توضیحات</label><textarea id="k-ta" class="form-control" rows="3" placeholder="توضیحات را بنویسید"></textarea></div>
+              </div>
+              <div class="setting-row"><div class="setting-row__text"><p class="setting-row__title">نمایش اعلان‌ها</p><p class="setting-row__desc">اعلان‌های تازه در نوار بالا نمایش داده می‌شوند.</p></div><div class="form-check form-switch"><input class="form-check-input" type="checkbox" role="switch" id="k-sw" checked aria-label="نمایش اعلان‌ها"></div></div>
+              <div class="form-check mb-3"><input class="form-check-input" type="checkbox" id="k-ck" checked><label class="form-check-label" for="k-ck">من قوانین را می‌پذیرم</label></div>
+              <div class="form-actions form-actions--sticky"><button type="submit" class="btn btn-primary">ذخیره تغییرات</button><button type="button" class="btn btn-outline-secondary">انصراف</button><span class="form-actions__status" role="status">ذخیره نشده</span></div>
+            </form>
+          </section>
+        </div>
+        <div class="col-12 col-lg-5" id="feedback">
+          <section class="card card-pad" aria-labelledby="fb-title">
+            <h2 class="card-head__title mb-3" id="fb-title">پیام‌ها و وضعیت‌ها</h2>
+            <div class="alert alert-success"><i class="ti ti-circle-check"></i><div>تنظیمات ذخیره شد.</div></div>
+            <div class="alert alert-warning"><i class="ti ti-alert-triangle"></i><div>افزونه GD در این سرور فعال نیست.</div></div>
+            <div class="alert alert-danger"><i class="ti ti-alert-circle"></i><div>خطا در ذخیره‌سازی.</div></div>
+            <div class="alert alert-info"><i class="ti ti-info-circle"></i><div>برای ادامه، رمز عبور جدید تعیین کنید.</div></div>
+            <p class="d-flex flex-wrap gap-2">
+              <span class="badge-soft badge-soft-success">منتشر شده</span><span class="badge-soft badge-soft-warning">در انتظار بررسی</span><span class="badge-soft badge-soft-danger">رد شده</span><span class="badge-soft badge-soft-info">اطلاعات</span><span class="badge-soft badge-soft-muted">متصل نیست</span>
+            </p>
+            <div class="d-flex flex-wrap gap-2 mb-3">
+              <button type="button" class="btn btn-primary">اصلی</button><button type="button" class="btn btn-outline-secondary">ثانویه</button><button type="button" class="btn btn-outline-danger">حذف</button><button type="button" class="btn btn-primary" disabled>غیرفعال</button>
+            </div>
+            <div class="d-flex flex-wrap gap-2 mb-3">
+              <div class="dropdown"><button type="button" class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">منو</button><ul class="dropdown-menu"><li><a class="dropdown-item" href="#feedback"><i class="ti ti-user-circle"></i>پروفایل من</a></li><li><a class="dropdown-item" href="#feedback"><i class="ti ti-logout"></i>خروج</a></li></ul></div>
+              <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#kitModal">باز کردن پنجره</button>
+            </div>
+            <ul class="pagination"><li class="page-item disabled"><span class="page-link">قبلی</span></li><li class="page-item"><a class="page-link" href="#feedback">۱</a></li><li class="page-item active"><a class="page-link" href="#feedback" aria-current="page">۲</a></li><li class="page-item"><a class="page-link" href="#feedback">۳</a></li><li class="page-item"><a class="page-link" href="#feedback">بعدی</a></li></ul>
+            <div class="progress mb-3" role="progressbar" aria-label="پیشرفت آپلود" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"><div class="progress-bar w-75">۷۵٪</div></div>
+            <span class="skeleton mb-2" aria-hidden="true"></span><span class="skeleton" aria-hidden="true"></span>
+          </section>
+        </div>
+      </div>
+
+      <div class="row g-3" id="upload">
+        <div class="col-12 col-lg-6"><section class="card card-pad"><div class="drop-zone" role="button" tabindex="0"><i class="ti ti-cloud-upload"></i><span>برای آپلود چند فایل کلیک کنید یا فایل‌ها را اینجا بکشید</span></div></section></div>
+        <div class="col-12 col-lg-6"><section class="card"><div class="empty-state"><span class="empty-state__icon"><i class="ti ti-files"></i></span><h2 class="empty-state__title">هنوز صفحه‌ای ساخته نشده است</h2><p class="empty-state__text">با ساخت اولین صفحه، سایت شما شکل می‌گیرد.</p><a class="btn btn-primary" href="#upload">ساخت اولین صفحه</a></div></section></div>
+      </div>
+
+      <section class="card card-pad" id="settings" aria-labelledby="dz-title">
+        <h2 class="card-head__title mb-3" id="dz-title">اقدام‌های حساس</h2>
+        <div class="danger-zone"><h3 class="danger-zone__title">حذف همکار</h3><p class="mb-3">با حذف همکار، دسترسی او فوراً قطع می‌شود.</p><button type="button" class="btn btn-danger">حذف همکار</button></div>
+      </section>
+    </main>
+  </div>
+</div>
+
+<div class="modal fade" id="kitModal" tabindex="-1" aria-labelledby="kitModalTitle" aria-hidden="true">
+  <div class="modal-dialog"><div class="modal-content">
+    <div class="modal-header"><h2 class="modal-title" id="kitModalTitle">افزودن همکار</h2><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="بستن"></button></div>
+    <div class="modal-body"><div class="field"><label class="field__label" for="m-name">نام کامل</label><input id="m-name" class="form-control" placeholder="نام کامل را وارد کنید"></div></div>
+    <div class="modal-footer"><button type="button" class="btn btn-primary">ایجاد</button><button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">انصراف</button></div>
+  </div></div>
+</div>
+</body>
+</html>

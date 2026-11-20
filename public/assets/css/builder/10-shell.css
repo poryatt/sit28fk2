@@ -1,0 +1,71 @@
+/* Builder stylesheets use NN-name.css numbering so an alphabetical glob emits
+ * them in deterministic cascade order. This file (10-shell.css) is Part 1's:
+ * shell layout, side column, states. Later parts add
+ * 20-canvas.css, 30-toolbar.css, ... Never style the block, toolbar or settings
+ * namespaces here — those belong to Parts 2-6. Colors come only from the design tokens (css/app/00-tokens.css); never hard-code one here. */
+
+/* Visibility switch shared by builder chrome: replaces inline
+ * element.style.display writes in JS (Part 9 clean-up). */
+.builder-is-hidden {
+  display: none !important;
+}
+
+#builder-root {
+  --builder-surface: var(--surface);
+  --builder-border: var(--border);
+  --builder-muted: var(--text-muted);
+  --builder-canvas-bg: var(--bg-subtle);
+  --builder-sticky-top: calc(var(--topbar-h) + var(--space-4));
+}
+
+#builder-root .builder-title-card,
+#builder-root .builder-canvas-card,
+#builder-root .builder-box-publish,
+#builder-root .builder-box-meta {
+  background-color: var(--builder-surface);
+  border-color: var(--builder-border);
+}
+
+#builder-root .builder-canvas {
+  min-height: 60vh;
+  background-color: var(--builder-canvas-bg);
+  border-radius: 0.375rem;
+}
+
+#builder-root .builder-canvas-state {
+  padding: 3rem 1rem;
+  text-align: center;
+  color: var(--builder-muted);
+}
+
+#builder-root .builder-meta-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  padding-block: 0.35rem;
+}
+
+#builder-root .builder-meta-row + .builder-meta-row {
+  border-top: 1px solid var(--builder-border);
+}
+
+#builder-root .builder-meta-label {
+  color: var(--builder-muted);
+  font-size: 0.85rem;
+}
+
+#builder-root .builder-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+@media (min-width: 992px) {
+  #builder-root .builder-side {
+    position: sticky;
+    top: var(--builder-sticky-top);
+    align-self: flex-start;
+  }
+}

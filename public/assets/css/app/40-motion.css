@@ -1,0 +1,64 @@
+/* ==========================================================================
+   40-motion.css — the motion system. Calm, never bouncy. Animate transform, opacity and color-like
+   properties only (width/grid-template-columns only for the sidebar). Tokens: --ease, --dur-1/2/3.
+   The ONLY place where !important is allowed here is the reduced-motion switch at the end and the
+   .theme-fade rule (documented exceptions).
+   ========================================================================== */
+
+@keyframes rise { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+@keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes pop-in { from { opacity: 0; transform: scale(0.96) translateY(4px); } to { opacity: 1; transform: none; } }
+@keyframes shimmer { from { background-position: 200% 0; } to { background-position: -200% 0; } }
+@keyframes bar-grow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+/* Page enter. fill-mode "backwards" (not "both"): after the animation nothing stays applied, so no lasting
+   stacking context or containing block is created. A page that holds #builder-root or fixed overlays adds
+   .app-content--flat to <main> and gets no enter animation at all. */
+.app-content:not(.app-content--flat) > * { animation: rise var(--dur-3) var(--ease) backwards; }
+.app-content:not(.app-content--flat) > :nth-child(2) { animation-delay: 60ms; }
+.app-content:not(.app-content--flat) > :nth-child(3) { animation-delay: 120ms; }
+.app-content:not(.app-content--flat) > :nth-child(4) { animation-delay: 180ms; }
+.app-content:not(.app-content--flat) > :nth-child(n+5) { animation-delay: 240ms; }
+.stagger > * { animation: rise var(--dur-3) var(--ease) backwards; }
+.stagger > :nth-child(2) { animation-delay: 70ms; }
+.stagger > :nth-child(3) { animation-delay: 140ms; }
+.stagger > :nth-child(4) { animation-delay: 210ms; }
+.stagger > :nth-child(n+5) { animation-delay: 280ms; }
+
+/* Buttons and icon buttons: color transitions + press. */
+.btn { transition: background-color var(--dur-1) var(--ease), border-color var(--dur-1) var(--ease), color var(--dur-1) var(--ease), transform var(--dur-1) var(--ease), box-shadow var(--dur-1) var(--ease); }
+.btn:active:not(:disabled):not(.disabled) { transform: scale(0.97); }
+
+/* Overlays. */
+.dropdown-menu.show { animation: pop-in var(--dur-1) var(--ease); }
+.modal.fade .modal-dialog { transform: scale(0.96); transition: transform var(--dur-2) var(--ease), opacity var(--dur-2) var(--ease); }
+.modal.show .modal-dialog { transform: none; }
+.swal2-popup.swal2-show { animation: pop-in var(--dur-2) var(--ease); }
+.alert { animation: fade-in var(--dur-2) var(--ease); }
+
+/* Feedback. */
+.skeleton { animation: shimmer 1.4s linear infinite; }
+.progress-bar { transform-origin: inline-start; transition: width var(--dur-2) var(--ease); }
+.form-control, .form-select, .form-check-input { transition: border-color var(--dur-1) var(--ease), box-shadow var(--dur-1) var(--ease), background-color var(--dur-1) var(--ease); }
+
+/* Theme switch fallback (browsers without View Transitions): PanelUI adds .theme-fade for 250 ms. */
+html.theme-fade *, html.theme-fade *::before, html.theme-fade *::after {
+  transition: background-color 250ms var(--ease), color 250ms var(--ease), border-color 250ms var(--ease), fill 250ms var(--ease) !important;
+}
+/* View Transitions: PanelUI animates the clip-path of the new snapshot itself. */
+::view-transition-old(root), ::view-transition-new(root) { animation: none; mix-blend-mode: normal; }
+::view-transition-old(root) { z-index: 1; }
+::view-transition-new(root) { z-index: 2; }
+
+/* ---- Reduced motion: one switch for everything above and for every component file. ---- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
+    scroll-behavior: auto !important;
+  }
+  ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; }
+}

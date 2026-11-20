@@ -1,0 +1,17 @@
+/* ==========================================================================
+   05-fonts.css — Vazirmatn variable font (SIL OFL), pinned to 33.0.3.
+   The browser tries the local file first (public/assets/vendor/vazirmatn/33.0.3/Vazirmatn-Variable.woff2,
+   put there by database/tools/fetch_vendor.php) and falls back to the pinned jsDelivr file of the same version.
+   This is the ONE place a CDN URL is written outside includes/vendor.php: CSS cannot call PHP.
+   Standard Vazirmatn is used (not the "FD" Farsi-digits build): the app converts to Persian digits on the server,
+   while e-mails, codes and slugs must keep Latin digits.
+   ========================================================================== */
+@font-face {
+  font-family: "Vazirmatn";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src:
+    url("/assets/vendor/vazirmatn/33.0.3/Vazirmatn-Variable.woff2") format("woff2"),
+    url("https://cdn.jsdelivr.net/npm/vazirmatn@33.0.3/fonts/webfonts/Vazirmatn%5Bwght%5D.woff2") format("woff2");
+}

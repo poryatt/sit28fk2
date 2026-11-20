@@ -1,0 +1,9 @@
+config/env.local.php
+storage/private/*
+!storage/private/.gitkeep
+!storage/private/.htaccess
+public/uploads/*
+!public/uploads/.htaccess
+backups/
+vendor/
+../panel-backups/

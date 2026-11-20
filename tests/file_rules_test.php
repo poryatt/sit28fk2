@@ -1,0 +1,76 @@
+<?php
+require __DIR__ . '/../includes/file_rules.php';
+$fail = 0;
+function check(string $label, $actual, $expected): void {
+    global $fail;
+    if ($actual !== $expected) { $fail++; fwrite(STDERR, "FAIL: $label\n  expected: " . var_export($expected, true) . "\n  actual:   " . var_export($actual, true) . "\n"); }
+}
+check('err ini', uploadErrorMessage(UPLOAD_ERR_INI_SIZE), 'حجم فایل بیش از حد مجاز سرور است');
+check('err form', uploadErrorMessage(UPLOAD_ERR_FORM_SIZE), 'حجم فایل بیش از حد مجاز سرور است');
+check('err nofile', uploadErrorMessage(UPLOAD_ERR_NO_FILE), 'فایلی ارسال نشده');
+check('err cant write', uploadErrorMessage(UPLOAD_ERR_CANT_WRITE), 'خطای سرور در دریافت فایل');
+check('img jpeg', imageExtForMime('image/jpeg'), 'jpg');
+check('img svg refused', imageExtForMime('image/svg+xml'), null);
+check('img gif refused', imageExtForMime('image/gif'), null);
+check('video mp4', videoExtForMime('video/mp4'), 'mp4');
+check('video avi refused', videoExtForMime('video/x-msvideo'), null);
+check('cert pdf', certificateExtForMime('application/pdf'), 'pdf');
+check('cert html refused', certificateExtForMime('text/html'), null);
+check('ico mime', isIcoMime('image/x-icon'), true);
+check('ico mime 2', isIcoMime('image/vnd.microsoft.icon'), true);
+check('ico mime png', isIcoMime('image/png'), false);
+check('ico magic', hasIcoMagic("\x00\x00\x01\x00\x01\x00"), true);
+check('ico magic bad', hasIcoMagic("GIF89a"), false);
+check('public ok', isSafePublicUploadPath('/uploads/media/' . str_repeat('a1', 16) . '.jpg'), true);
+check('public avatar ok', isSafePublicUploadPath('/uploads/avatars/' . str_repeat('0f', 16) . '.png'), true);
+check('public traversal', isSafePublicUploadPath('/uploads/media/../../config/config.php'), false);
+check('public php ext', isSafePublicUploadPath('/uploads/media/' . str_repeat('a1', 16) . '.php'), false);
+check('public uppercase hex', isSafePublicUploadPath('/uploads/media/' . str_repeat('A1', 16) . '.jpg'), false);
+check('public other dir', isSafePublicUploadPath('/uploads/licenses/' . str_repeat('a1', 16) . '.pdf'), false);
+check('private ok', isSafePrivatePath('licenses/' . str_repeat('a1', 16) . '.pdf'), true);
+check('private tpl ok', isSafePrivatePath('templates/' . str_repeat('a1', 16) . '.zip'), true);
+check('private traversal', isSafePrivatePath('licenses/../../x.pdf'), false);
+check('private abs', isSafePrivatePath('/etc/passwd'), false);
+check('dims ok', imageDimensionsAllowed(1920, 1080), true);
+check('dims zero', imageDimensionsAllowed(0, 10), false);
+check('dims huge side', imageDimensionsAllowed(10001, 10), false);
+check('dims bomb', imageDimensionsAllowed(9000, 9000), false);
+check('zip ok', zipEntryIsSafe('theme/css/app.css'), true);
+check('zip dir ok', zipEntryIsSafe('theme/'), true);
+check('zip slip', zipEntryIsSafe('../evil.html'), false);
+check('zip slip nested', zipEntryIsSafe('a/../../evil.html'), false);
+check('zip abs', zipEntryIsSafe('/etc/passwd'), false);
+check('zip drive', zipEntryIsSafe('C:evil.txt'), false);
+check('zip backslash', zipEntryIsSafe('a\\..\\evil'), false);
+check('zip nul', zipEntryIsSafe("a\0.html"), false);
+check('zip empty', zipEntryIsSafe(''), false);
+check('zip ext html', zipEntryExtensionAllowed('index.html'), true);
+check('zip ext php', zipEntryExtensionAllowed('x/shell.php'), false);
+check('zip ext phtml', zipEntryExtensionAllowed('x/shell.phtml'), false);
+check('zip ext svg refused', zipEntryExtensionAllowed('logo.svg'), false);
+check('zip htaccess refused', zipEntryExtensionAllowed('.htaccess'), false);
+check('zip double ext', zipEntryExtensionAllowed('a.php.png'), true);
+check('zip no ext refused', zipEntryExtensionAllowed('Makefile'), false);
+check('zip dir allowed', zipEntryExtensionAllowed('assets/'), true);
+// Part 9: magic bytes, script markers, fallback policy
+check('magic jpg ok', imageMagicMatches("\xFF\xD8\xFF\xE0xxxx", 'jpg'), true);
+check('magic jpg wrong ext', imageMagicMatches("\xFF\xD8\xFF\xE0xxxx", 'png'), false);
+check('magic png ok', imageMagicMatches("\x89PNG\r\n\x1a\nrest", 'png'), true);
+check('magic png wrong ext', imageMagicMatches("\x89PNG\r\n\x1a\nrest", 'jpg'), false);
+check('magic webp ok', imageMagicMatches('RIFFxxxxWEBPVP8 ', 'webp'), true);
+check('magic webp bad riff', imageMagicMatches('RIFXxxxxWEBPVP8 ', 'webp'), false);
+check('magic truncated', imageMagicMatches("\xFF\xD8", 'jpg'), false);
+check('magic empty', imageMagicMatches('', 'jpg'), false);
+check('magic unknown ext', imageMagicMatches('whatever', 'gif'), false);
+check('markers php', containsServerScriptMarkers('abc<?php echo 1;'), true);
+check('markers short echo', containsServerScriptMarkers('a<?= 1 ?>'), true);
+check('markers script', containsServerScriptMarkers('<SCRIPT src=x>'), true);
+check('markers clean', containsServerScriptMarkers(str_repeat("\x01", 64)), false);
+check('policy env passthrough', imageFallbackPolicy('passthrough', 'production'), 'passthrough');
+check('policy env refuse', imageFallbackPolicy('refuse', 'local'), 'refuse');
+check('policy prod', imageFallbackPolicy(null, 'production'), 'refuse');
+check('policy local', imageFallbackPolicy(null, 'local'), 'passthrough');
+check('policy null null', imageFallbackPolicy(null, null), 'passthrough');
+check('policy garbage env', imageFallbackPolicy('whatever', 'local'), 'passthrough');
+if ($fail > 0) { fwrite(STDERR, "$fail failure(s)\n"); exit(1); }
+echo "file_rules_test: OK\n";

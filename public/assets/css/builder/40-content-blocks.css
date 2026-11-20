@@ -1,0 +1,358 @@
+/* Builder 40-content-blocks.css (Parts 4-6).
+ * Namespaces: .builder-text-*, .builder-image-*, .builder-button-*,
+ * .builder-slider-*, .builder-story-*. Never touch block/toolbar/settings/insert names.
+ */
+
+#builder-root .builder-text-editable {
+  min-height: 3rem;
+  padding: 0.5rem 0.6rem;
+  border-radius: 0.375rem;
+  outline: none;
+  word-break: break-word;
+  color: var(--builder-text-color, inherit);
+  background-color: var(--builder-text-bg, transparent);
+}
+#builder-root .builder-text-editable[data-align="right"] { text-align: right; }
+#builder-root .builder-text-editable[data-align="center"] { text-align: center; }
+#builder-root .builder-text-editable[data-align="left"] { text-align: left; }
+#builder-root .builder-text-editable[data-align="justify"] { text-align: justify; }
+#builder-root .builder-text-editable:empty::before {
+  content: attr(data-placeholder);
+  color: var(--builder-muted);
+}
+#builder-root .builder-text-editable:focus-visible {
+  outline: var(--focus-width) solid var(--focus-ring);
+  outline-offset: var(--focus-offset);
+}
+#builder-root .builder-text-editable h1,
+#builder-root .builder-text-editable h2,
+#builder-root .builder-text-editable h3,
+#builder-root .builder-text-editable h4,
+#builder-root .builder-text-editable p,
+#builder-root .builder-text-editable blockquote,
+#builder-root .builder-text-editable ul,
+#builder-root .builder-text-editable ol {
+  margin: 0 0 0.5rem;
+}
+#builder-root .builder-text-editable blockquote {
+  padding-inline-start: 0.75rem;
+  border-inline-start: 3px solid var(--builder-border);
+  color: var(--builder-muted);
+}
+#builder-root .builder-text-field,
+#builder-root .builder-image-field,
+#builder-root .builder-button-field,
+#builder-root .builder-slider-field,
+#builder-root .builder-story-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  margin-bottom: 0.7rem;
+  font-size: 0.85rem;
+}
+#builder-root .builder-text-hint,
+#builder-root .builder-slider-hint,
+#builder-root .builder-story-hint {
+  font-size: 0.8rem;
+  color: var(--builder-muted);
+  margin-top: 0.5rem;
+}
+#builder-root .builder-image-media {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.375rem;
+  display: block;
+  margin-inline: auto;
+}
+#builder-root video.builder-image-media {
+  width: 100%;
+  max-height: 60vh;
+  background: var(--viewer-stage);
+}
+#builder-root .builder-image-empty {
+  padding: 1.5rem 1rem;
+  text-align: center;
+  color: var(--builder-muted);
+  border: 1px dashed var(--builder-border);
+  border-radius: 0.375rem;
+}
+#builder-root .builder-image-caption {
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--builder-muted);
+  margin-top: 0.4rem;
+}
+#builder-root .builder-image-progress {
+  font-size: 0.8rem;
+  color: var(--builder-muted);
+}
+#builder-root .builder-image-check {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-bottom: 0.5rem;
+  font-size: 0.85rem;
+}
+#builder-root .builder-button-wrap {
+  text-align: center;
+  padding: 0.4rem 0;
+}
+#builder-root .builder-button-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+#builder-root .builder-button-img {
+  max-height: 2rem;
+  width: auto;
+  border-radius: 0.25rem;
+}
+#builder-root .builder-button-check {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-bottom: 0.6rem;
+  font-size: 0.85rem;
+}
+#builder-root .builder-slider {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.375rem;
+  background: var(--builder-canvas-bg);
+}
+#builder-root .builder-slider-viewport {
+  width: 100%;
+  overflow: hidden;
+}
+#builder-root .builder-slider-track {
+  width: 100%;
+}
+#builder-root .builder-slider-slide {
+  width: 100%;
+  text-align: center;
+}
+#builder-root .builder-slider-img {
+  width: 100%;
+  height: auto;
+  max-height: 60vh;
+  object-fit: contain;
+  display: block;
+}
+#builder-root .builder-slider-caption {
+  font-size: 0.85rem;
+  color: var(--builder-muted);
+  padding: 0.35rem 0.5rem;
+}
+#builder-root .builder-slider-empty {
+  padding: 1.5rem 1rem;
+  text-align: center;
+  color: var(--builder-muted);
+}
+#builder-root .builder-slider-nav {
+  position: absolute;
+  top: 40%;
+  border: 0;
+  border-radius: 50%;
+  width: 2rem;
+  height: 2rem;
+  background: var(--builder-surface);
+  border: 1px solid var(--builder-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#builder-root .builder-slider-prev { inset-inline-start: 0.5rem; }
+#builder-root .builder-slider-next { inset-inline-end: 0.5rem; }
+#builder-root .builder-slider-dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.35rem;
+  padding: 0.5rem 0;
+}
+#builder-root .builder-slider-dot {
+  width: 0.6rem;
+  height: 0.6rem;
+  border-radius: 50%;
+  border: 1px solid var(--builder-border);
+  background: transparent;
+  padding: 0;
+}
+#builder-root .builder-slider-dot-active {
+  background: var(--builder-muted);
+}
+#builder-root .builder-slider-list,
+#builder-root .builder-story-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-bottom: 0.7rem;
+}
+#builder-root .builder-slider-card,
+#builder-root .builder-story-card {
+  border: 1px solid var(--builder-border);
+  border-radius: 0.375rem;
+  padding: 0.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+#builder-root .builder-slider-card-title,
+#builder-root .builder-story-card-title {
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+#builder-root .builder-slider-check {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-bottom: 0.5rem;
+  font-size: 0.85rem;
+}
+#builder-root .builder-story-row {
+  display: flex;
+  gap: 0.8rem;
+  overflow-x: auto;
+  padding: 0.5rem 0.2rem;
+}
+#builder-root .builder-story-empty {
+  padding: 1.5rem 1rem;
+  text-align: center;
+  color: var(--builder-muted);
+  border: 1px dashed var(--builder-border);
+  border-radius: 0.375rem;
+}
+#builder-root .builder-story-circle {
+  border: 0;
+  background: transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  min-width: 4.2rem;
+}
+#builder-root .builder-story-cover {
+  width: 3.8rem;
+  height: 3.8rem;
+  border-radius: 50%;
+  border: 2px solid var(--builder-border);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  background: var(--builder-surface);
+}
+#builder-root .builder-story-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+#builder-root .builder-story-title {
+  font-size: 0.75rem;
+  max-width: 4.2rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+#builder-root .builder-story-items {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+#builder-root .builder-story-item {
+  display: flex;
+  gap: 0.35rem;
+}
+
+/* Fullscreen viewer: appended to document.body, so it cannot rely on
+ * #builder-root custom properties; it reads the --viewer-* design tokens (defined on :root, same in both themes). */
+.builder-story-viewer {
+  position: fixed;
+  inset: 0;
+  background: var(--viewer-scrim);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.builder-story-viewer-box {
+  position: relative;
+  width: min(420px, 94vw);
+  max-height: 92vh;
+  background: var(--viewer-surface);
+  border-radius: 0.75rem;
+  overflow: hidden;
+}
+.builder-story-viewer-close {
+  position: absolute;
+  top: 0.5rem;
+  inset-inline-end: 0.5rem;
+  z-index: 3;
+  border: 0;
+  border-radius: 50%;
+  width: 2rem;
+  height: 2rem;
+  background: var(--viewer-control-bg);
+  color: var(--viewer-control-fg);
+}
+.builder-story-bars {
+  position: absolute;
+  top: 0.5rem;
+  inset-inline: 0.6rem;
+  z-index: 2;
+  display: flex;
+  gap: 0.25rem;
+}
+.builder-story-bar {
+  flex: 1;
+  height: 3px;
+  background: var(--viewer-track);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.builder-story-bar-fill {
+  height: 100%;
+  width: 0;
+  background: var(--viewer-fg);
+}
+/* Bar animation states (replace the inline width/transition writes). */
+.builder-story-bar-fill--full { width: 100%; }
+.builder-story-bar-fill--running {
+  width: 100%;
+  transition: width var(--builder-story-dur, 5s) linear;
+}
+.builder-story-bar-fill--paused { animation-play-state: paused; }
+.builder-story-stage {
+  width: 100%;
+  min-height: 50vh;
+  max-height: 92vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--viewer-stage);
+}
+.builder-story-stage img,
+.builder-story-stage video {
+  width: 100%;
+  max-height: 92vh;
+  object-fit: contain;
+}
+.builder-story-err {
+  color: var(--viewer-fg);
+  padding: 2rem;
+}
+.builder-story-prev,
+.builder-story-next {
+  position: absolute;
+  top: 45%;
+  z-index: 2;
+  border: 0;
+  border-radius: 50%;
+  width: 2rem;
+  height: 2rem;
+  background: var(--viewer-control-bg);
+  color: var(--viewer-control-fg);
+}
+.builder-story-prev { inset-inline-start: 0.4rem; }
+.builder-story-next { inset-inline-end: 0.4rem; }
+
